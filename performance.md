@@ -37,7 +37,7 @@ description: Portfolio analytics and IRR calculation
 
 <div class="charts-grid">
   <div class="card">
-    <h2 class="card-title">Category Performance</h2>
+    <h2 class="card-title">Set Performance</h2>
     <div id="category-breakdown" class="loading">Loading...</div>
   </div>
 
@@ -62,10 +62,9 @@ description: Portfolio analytics and IRR calculation
       cash flows. Unlike simple return calculations, IRR properly weights:
     </p>
     <ul>
-      <li>When you bought each item (earlier purchases have more time to compound)</li>
+      <li>When you bought each product (earlier purchases have more time to appreciate)</li>
       <li>The size of each investment</li>
-      <li>Additional expenses like insurance and storage</li>
-      <li>Any income from dividends, partial sales, or distributions</li>
+      <li>Any proceeds from sales of sealed products</li>
     </ul>
     <p>
       The IRR shown above is calculated using the Newton-Raphson method,
@@ -122,7 +121,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const headerMap = {
       'deposit/withdrawal': 'amount',
       'transaction_type': 'type',
-      'date_aquired': 'date_acquired'
+      'totoal_cost_basis': 'total_cost_basis'
     };
     const headers = rawHeaders.map(h => headerMap[h] || h);
     const data = [];
@@ -228,7 +227,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             <thead>
               <tr>
                 <th>Date</th>
-                <th>ID</th>
+                <th>Name</th>
                 <th>Cost Basis</th>
                 <th>Sale Price</th>
                 <th>Realized Gain</th>
@@ -249,7 +248,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         salesHtml += `
           <tr>
             <td>${sale.date || ''}</td>
-            <td class="name-cell">${sale.id || ''}</td>
+            <td class="name-cell">${sale.name || sale.id || ''}</td>
             <td class="value-cell">${formatCurrency(costBasis)}</td>
             <td class="value-cell">${formatCurrency(salePrice)}</td>
             <td class="value-cell ${gainClass}">${gain >= 0 ? '+' : ''}${formatCurrency(gain)}</td>

@@ -56,6 +56,6 @@ title: Dashboard
 </div>
 
 <div class="card">
-  <h2 class="card-title">Category Breakdown</h2>
+  <h2 class="card-title">Set Breakdown</h2>
   <div id="category-breakdown" class="loading">Loading...</div>
 </div>

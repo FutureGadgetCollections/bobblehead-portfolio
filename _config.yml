@@ -1,14 +1,16 @@
 # Site settings
-title: Crypto Main Portfolio
-description: Track your crypto cash flow positions, yields, and performance
-baseurl: "/crypto-main-portfolio" # subpath of your site, e.g. /portfolio
+title: Pokemon Sealed Portfolio
+description: Track your Pokemon sealed product investments and performance
+baseurl: "/pokemon-sealed-portfolio" # subpath of your site, e.g. /portfolio
 url: "https://futuregadgettemplates.github.io" # the base hostname & protocol for your site
 
-# Google Sheets TSV URLs
+# Google Sheets URLs
 sheets:
-  transactions: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRcga8n3ozb2Rm8XSq_1kF7z4DV97p6TO4n9Anq33i2W1oyVMA-2HVDsczoopWMkkTOLY62jZd9SKwO/pub?gid=0&single=true&output=tsv"
-  holdings: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRcga8n3ozb2Rm8XSq_1kF7z4DV97p6TO4n9Anq33i2W1oyVMA-2HVDsczoopWMkkTOLY62jZd9SKwO/pub?gid=1563230874&single=true&output=tsv"
-  sales: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRcga8n3ozb2Rm8XSq_1kF7z4DV97p6TO4n9Anq33i2W1oyVMA-2HVDsczoopWMkkTOLY62jZd9SKwO/pub?gid=845485488&single=true&output=tsv"
+  published: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqaNjbbTYOMa_1As1caSK93pNIrifP14g0pFVpiArl9hNNhShJN0wAwqBddh1w-txmV8BMb5XhbEHm/pubhtml"
+  collectr: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqaNjbbTYOMa_1As1caSK93pNIrifP14g0pFVpiArl9hNNhShJN0wAwqBddh1w-txmV8BMb5XhbEHm/pub?gid=425722331&single=true&output=tsv"
+  transactions: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqaNjbbTYOMa_1As1caSK93pNIrifP14g0pFVpiArl9hNNhShJN0wAwqBddh1w-txmV8BMb5XhbEHm/pub?gid=0&single=true&output=tsv"
+  holdings: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqaNjbbTYOMa_1As1caSK93pNIrifP14g0pFVpiArl9hNNhShJN0wAwqBddh1w-txmV8BMb5XhbEHm/pub?gid=1563230874&single=true&output=tsv"
+  sales: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqaNjbbTYOMa_1As1caSK93pNIrifP14g0pFVpiArl9hNNhShJN0wAwqBddh1w-txmV8BMb5XhbEHm/pub?gid=845485488&single=true&output=tsv"
 
 # Build settings
 markdown: kramdown

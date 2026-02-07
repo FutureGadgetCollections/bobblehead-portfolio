@@ -53,8 +53,7 @@
     const headerMap = {
       'deposit/withdrawal': 'amount',
       'transaction_type': 'type',
-      'date_aquired': 'date_acquired',
-      'last_checked_date': 'last_checked_date'
+      'totoal_cost_basis': 'total_cost_basis'
     };
 
     const headers = rawHeaders.map(h => headerMap[h] || h);
@@ -248,7 +247,7 @@
       // Add current values as terminal cash flow (today)
       const today = new Date();
       const totalCurrentValue = DATA.holdings.reduce((sum, h) => {
-        const val = parseFloat(h.current_value);
+        const val = parseFloat(h.total_current_value);
         return sum + (isNaN(val) ? 0 : val);
       }, 0);
 
@@ -298,7 +297,7 @@
       btn.addEventListener('click', function() {
         filterButtons.forEach(b => b.classList.remove('active'));
         this.classList.add('active');
-        currentFilter = this.dataset.category;
+        currentFilter = this.dataset.set;
         filterRows();
       });
     });
@@ -327,15 +326,15 @@
 
       rows.forEach(row => {
         const name = row.querySelector('.name-cell')?.textContent.toLowerCase() || '';
-        const category = row.dataset.category || '';
+        const set = row.dataset.set || '';
         const notes = row.dataset.notes?.toLowerCase() || '';
 
         const matchesSearch = !searchTerm ||
           name.includes(searchTerm) ||
-          category.toLowerCase().includes(searchTerm) ||
+          set.toLowerCase().includes(searchTerm) ||
           notes.includes(searchTerm);
 
-        const matchesFilter = currentFilter === 'all' || category === currentFilter;
+        const matchesFilter = currentFilter === 'all' || set === currentFilter;
 
         row.style.display = matchesSearch && matchesFilter ? '' : 'none';
       });
@@ -370,22 +369,22 @@
     if (!container) return;
 
     try {
-      const categories = {};
+      const sets = {};
       DATA.holdings.forEach(h => {
-        const cat = h.category;
-        if (!categories[cat]) {
-          categories[cat] = { value: 0, cost: 0 };
+        const s = h.set;
+        if (!sets[s]) {
+          sets[s] = { value: 0, cost: 0 };
         }
-        const val = parseFloat(h.current_value) || 0;
-        const cost = parseFloat(h.cost_basis) || 0;
-        categories[cat].value += val;
-        categories[cat].cost += cost;
+        const val = parseFloat(h.total_current_value) || 0;
+        const cost = parseFloat(h.total_cost_basis) || 0;
+        sets[s].value += val;
+        sets[s].cost += cost;
       });
 
-      const totalValue = Object.values(categories).reduce((sum, c) => sum + c.value, 0);
+      const totalValue = Object.values(sets).reduce((sum, c) => sum + c.value, 0);
 
       let html = '<ul class="category-list">';
-      Object.entries(categories)
+      Object.entries(sets)
         .sort((a, b) => b[1].value - a[1].value)
         .forEach(([name, data]) => {
           const percentage = totalValue > 0 ? (data.value / totalValue * 100).toFixed(1) : 0;
@@ -431,8 +430,8 @@
 
     try {
       const withGains = DATA.holdings.map(h => {
-        const cost = parseFloat(h.cost_basis) || 0;
-        const value = parseFloat(h.current_value) || 0;
+        const cost = parseFloat(h.total_cost_basis) || 0;
+        const value = parseFloat(h.total_current_value) || 0;
         const gainLoss = value - cost;
         const gainLossPct = cost > 0 ? (gainLoss / cost) : 0;
         return { ...h, gainLoss, gainLossPct };
@@ -446,7 +445,7 @@
           <div class="mover-item">
             <div class="mover-info">
               <span class="mover-name">${h.name}</span>
-              <span class="mover-category">${h.category}</span>
+              <span class="mover-category">${h.set}</span>
             </div>
             <span class="mover-change positive">+${(h.gainLossPct * 100).toFixed(1)}%</span>
           </div>
@@ -463,7 +462,7 @@
             <div class="mover-item">
               <div class="mover-info">
                 <span class="mover-name">${h.name}</span>
-                <span class="mover-category">${h.category}</span>
+                <span class="mover-category">${h.set}</span>
               </div>
               <span class="mover-change ${pctClass}">${sign}${(h.gainLossPct * 100).toFixed(1)}%</span>
             </div>
@@ -528,8 +527,8 @@
       let totalValue = 0;
 
       DATA.holdings.forEach(h => {
-        totalCost += parseFloat(h.cost_basis) || 0;
-        totalValue += parseFloat(h.current_value) || 0;
+        totalCost += parseFloat(h.total_cost_basis) || 0;
+        totalValue += parseFloat(h.total_current_value) || 0;
       });
 
       const totalGainLoss = totalValue - totalCost;
@@ -607,7 +606,7 @@
         html += `
           <div class="sale-item">
             <div class="sale-info">
-              <span class="sale-holding">${s.id || ''}</span>
+              <span class="sale-holding">${s.name || s.id || ''}</span>
               <span class="sale-date">${s.date || ''}</span>
               <span class="sale-notes">${s.notes || ''}</span>
             </div>
