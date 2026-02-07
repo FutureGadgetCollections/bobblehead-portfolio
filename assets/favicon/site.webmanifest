@@ -1,14 +1,14 @@
 {
-  "name": "Crypto Cash Flow Portfolio",
+  "name": "Crypto Main Portfolio",
   "short_name": "Portfolio",
   "icons": [
     {
-      "src": "/crypto-cash-flow-portfolio/assets/favicon/android-chrome-192x192.png",
+      "src": "/crypto-main-portfolio/assets/favicon/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/crypto-cash-flow-portfolio/assets/favicon/android-chrome-512x512.png",
+      "src": "/crypto-main-portfolio/assets/favicon/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
@@ -16,5 +16,5 @@
   "theme_color": "#2563eb",
   "background_color": "#ffffff",
   "display": "standalone",
-  "start_url": "/crypto-cash-flow-portfolio/"
+  "start_url": "/crypto-main-portfolio/"
 }

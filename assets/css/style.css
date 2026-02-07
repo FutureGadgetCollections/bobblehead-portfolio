@@ -316,8 +316,10 @@ main {
   background: white;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
-  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
+
 
 .holdings-table {
   width: 100%;
